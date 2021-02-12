@@ -95,11 +95,10 @@ public class Vista {
      */
     public Comparable[] newList(){
         
-        File file = new File("list.txt");
         try {
             
             print("\nLeyendo archivo list.txt");
-            Scanner scanFile = new Scanner(file);
+            Scanner scanFile = new Scanner(new File("list.txt"));
             String temp_stringList = scanFile.nextLine();
             Comparable[] new_list = temp_stringList.split(" ");
             return new_list;
@@ -145,6 +144,21 @@ public class Vista {
             
         } catch (IOException e) {
             print("ERROR: No se encontro el archivo \"list.txt\"\n");
+        }
+    }
+
+    public String clearFile(){
+
+        try {
+            
+            FileWriter writer = new FileWriter("list.txt");
+            writer.nullWriter();
+            writer.close();
+            return "EL archivo list.txt ha sido borrado con exito";
+
+        } catch (Exception e) {
+
+            return "No se encontro el archivo \"list.txt\"";
         }
     }
 }

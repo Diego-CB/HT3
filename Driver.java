@@ -52,6 +52,10 @@ public class Driver {
             } 
             
             menu_p = v.input();
+            
+            if (menu_p){
+                v.clearFile();
+            }
         }
         v.print("\n\nGracias por usar el Sorting App!!\n");
     }
