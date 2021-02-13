@@ -15,6 +15,7 @@ public class Driver {
     // Atributos
     private static Comparable[] listToSort;
     private static Vista v = new Vista();
+    private static Sorting sort = new Sorting();
     
     /**
      * main method
@@ -36,19 +37,36 @@ public class Driver {
             if (listToSort[0] instanceof Comparable){
 
                 opcion = v.input(5);
-                v.print("\nEsta es la lista ordenada: \n");
 
+                /*
+                // Gnome Sort
                 if (opcion == 1){
-                    //TODO
+
+                    listToSort = sort.GnomeSort(listToSort, 0);
+
+                // Merge sort
                 } else if (opcion == 2){
-                    //TODO
+
+                    //listToSort = sort.MergeSort(listToSort, 0, listToSort.length / 2, listToSort.length - 1);
+                    
+                // Quick Sort
                 } else if (opcion == 3){
-                    //TODO
+
+                    listToSort = sort.QuickSort(listToSort, 0, listToSort.length - 1);
+                
+                // radix Sort
                 } else if (opcion == 4){
+
+                    //listToSort = sort.RadixSort(listToSort, 0, listToSort.length - 1);
                     //TODO
+                    
+                //Bubble sort
                 } else if (opcion == 5){
-                    //TODO
+
+                    listToSort = sort.BubbleSort(listToSort);
                 }
+
+                v.orderedList(listToSort);*/
             } 
             
             menu_p = v.input();

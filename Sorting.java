@@ -14,13 +14,14 @@ import java.util.*;
 
 public class Sorting {
     
+	Comparable comp;
     /**
      * Constructor methd, creates an iteration of the class
      */
     public Comparable[] BubbleSort(Comparable[] array){
 		for(int i = 0; i < array.length; i++){
 			for(int j = 0; j <array.length; j++){
-				if(array[j].compareTo(array[i] == 1){
+				if(array[i].compareTo(array[j]) > 0){
 					Comparable temp = array[i];
 					array[i] = array[j];
 					array[j] = temp;
@@ -30,6 +31,7 @@ public class Sorting {
 		return array;
 	}
 
+	//TODO Ciclo infinito
 	public Comparable[] QuickSort(Comparable[] array, int x, int y){
 		int i = x;
 		int j = y;
@@ -55,6 +57,8 @@ public class Sorting {
 		return array;
 	}
 	
+	//TODO
+	/*
 	public Comparable[] RadixSort(Comparable[] array, int x, int y){
 		Comparable medio = array[(x+y)/2];
 		while (x <= y){
@@ -66,24 +70,26 @@ public class Sorting {
 				array[y] = temp;
 				}
 			}
-	}
+	}*/
 	
 	public Comparable[] GnomeSort(Comparable[] array, int x){
 		int ind = 0;
 		while (ind < x){
 			if (ind == 0){
-				index++;
-			}if(array[ind].compareTo(array[ind-1) > 0){
-				index++;
+				ind++;
+			}
+			if(array[ind].compareTo(array[ind-1]) > 0){
+				ind++;
 			}else{
 				Comparable temp = 0;
 				temp = array[ind];
 				array[ind] = array[ind-1];
 				array[ind-1] = temp;
-				index--;
+				ind--;
 			}
 		}
-		return array;
+			return array;
+		
 	}
 	
 	public Comparable[] MergeSort(Comparable[] array, int x, int y, int z){
@@ -96,14 +102,15 @@ public class Sorting {
 		j = y+1;
 		k = x;
 		while(i <= y && j <= z){
-			if (temp[i].CompareTo(temp[j] <= 0){
+			if (temp[i].compareTo(temp[j]) <= 0){
 				array[k++] = temp[i++];
 			}else{
 				array[k++] = temp[j++];	
 			}
-		}while(i <= y){
-			array[k++] = temp[i++];
-		}
-	}
+			}while(i <= y){
+				array[k++] = temp[i++];
+			}
+		
 	return array;
+	}	
 }
