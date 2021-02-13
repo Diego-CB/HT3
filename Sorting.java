@@ -2,12 +2,13 @@
 * Universidad del Valle de Guatemala
 * Algoritmos y Estructuras de Datos
 * Profesor: Moises Gonzales
-* Driver.java
+* Sorting.java
 * @author Roberto Vallecillos & Diego Cordova
-* Ultima modificacion: 2021-02-10
+* @version 1.0
+* Ultima modificacion: 2021-02-13
 *
-* clase sortGenerator
-* Generate a sorting type class using factory Design pattern
+* Clase Sorting
+* Implementation of sorting algorithms
 ********************************************************/
 
 import java.util.*;
@@ -16,8 +17,10 @@ import java.util.ArrayList;
 public class Sorting {
     
     /**
-     * Constructor methd, creates an iteration of the class
-     */
+	 * It sorts an array using bubble sort algorithm
+	 * @param array unsorted Comparable array to sort
+	 * @return the sorted array
+	 */
     public Comparable[] BubbleSort(Comparable[] array){
 		for(int i = 0; i < array.length; i++){
 			for(int j = 0; j <array.length; j++){
@@ -57,7 +60,11 @@ public class Sorting {
 		return array;
 	}
 	
-	//TODO
+	/**
+	 * It sorts an array using radix sort algorithm
+	 * @param array unsorted Comparable array to sort
+	 * @return the sorted array
+	 */
 	public Comparable[] RadixSort(Comparable[] array){
 		
 		Comparable max = 0;
@@ -71,19 +78,37 @@ public class Sorting {
 		int digit_length = String.valueOf((int) max).length();
 		for (int i = 1; i < digit_length + 1;i++){
 
-			ArrayList[] bucket = new ArrayList[10];
-			for (int j; i < 10; i++){
-				bucket[i] = new ArrayList<Comparable>();
+			ArrayList<Comparable>[] bucket = new ArrayList[10];
+			for (int j = 0; j < 10; j++){
+				bucket[j] = new ArrayList<Comparable>();
 			}
 
-			for (int j; i < 10; i++){
-				bucket[i] = new ArrayList<Comparable>();
+			for (int j = 0; j < array.length; j++){
+				
+				Comparable temp = digit(String.valueOf(array[j]).split(""), i);
+				bucket[(int) temp].add(array[j]);
 			}
 
+			ArrayList<Comparable> temp_array = new ArrayList<Comparable>();
+			for (int j = 0; j < 10; j++){
+				for (int k = 0; k < bucket[j].size(); k++){
+
+					temp_array.add(bucket[j].get(k));
+				}
+			}
+
+			for (int j = 0; j < temp_array.size() ;j++){
+				array[j] = temp_array.get(j);
+			}
 		}
 		return array;
 	}
 	
+	/**
+	 * It sorts an array using Gnome sort algorithm
+	 * @param array unsorted Comparable array to sort
+	 * @return the sorted array
+	 */
 	public Comparable[] GnomeSort(Comparable[] array, int x){
 		int ind = 0;
 		while (ind < x){
@@ -127,6 +152,12 @@ public class Sorting {
 	return array;
 	}	
 	
+	/**
+	 * It sorts an array using Merge sort algorithm
+	 * @param array unsorted Comparable array to sort
+	 * @param x a base number, it has to be equal to 0
+	 * @return the sorted array
+	 */
 	public Comparable[] MergeSort(Comparable[] array, int x, int z){
 		if (x < z){
 			int y = x + (z-x)/2;
@@ -137,6 +168,12 @@ public class Sorting {
 		return array;
 	}
 	
+	/**
+	 * It returns the digit in the given position of a number
+	 * @param num String with number digits
+	 * @param position requested position of the number
+	 * @return If the number has the position wanted it return the digit in that position, if not returns 0
+	 */
 	private Comparable digit(String[] num, int position){
 
 		if (position > num.length){

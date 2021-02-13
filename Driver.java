@@ -5,9 +5,10 @@
 * Driver.java
 * @author Roberto Vallecillos & Diego Cordova
 * @version 1.0
-* Ultima modificacion: 2021-02-12
+* Ultima modificacion: 2021-02-13
 *
 * Driver Program
+* Contains main method
 ********************************************************/
 
 public class Driver {
@@ -47,7 +48,7 @@ public class Driver {
                 // Merge sort
                 } else if (opcion == 2){
 
-                    listToSort = sort.MergeSort(listToSort, 0, listToSort.length / 2, listToSort.length - 1);
+                    listToSort = sort.MergeSort(listToSort, 0, listToSort.length - 1);
                     
                 // Quick Sort
                 } else if (opcion == 3){
@@ -57,7 +58,7 @@ public class Driver {
                 // radix Sort
                 } else if (opcion == 4){
 
-                    listToSort = sort.RadixSort(listToSort, 0, listToSort.length - 1);
+                    listToSort = sort.RadixSort(listToSort);
                     //TODO
                     
                 //Bubble sort
@@ -66,7 +67,7 @@ public class Driver {
                     listToSort = sort.BubbleSort(listToSort);
                 }
 
-                v.orderedList(listToSort);*/
+                v.orderedList(listToSort);
             } 
             
             menu_p = v.input();

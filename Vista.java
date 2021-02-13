@@ -5,7 +5,7 @@
 * Vista.java
 * @author Roberto Vallecillos & Diego Cordova
 * @version 1.0
-* Ultima modificacion: 2021-02-12
+* Ultima modificacion: 2021-02-13
 *
 * Vista del programa
 ********************************************************/
@@ -100,7 +100,11 @@ public class Vista {
             print("\nLeyendo archivo list.txt");
             Scanner scanFile = new Scanner(new File("list.txt"));
             String temp_stringList = scanFile.nextLine();
-            Comparable[] new_list = temp_stringList.split(" ");
+            String[] temp_list = temp_stringList.split(" ");
+            Comparable[] new_list = new Comparable[temp_list.length];
+            for (int i = 0; i < temp_list.length;i++){
+                new_list[i] = Integer.parseInt(temp_list[i]);
+            }
             return new_list;
 
         } catch (FileNotFoundException e) {
