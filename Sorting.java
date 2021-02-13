@@ -90,10 +90,10 @@ public class Sorting {
 			if (ind == 0){
 				ind++;
 			}
-			if(array[ind].compareTo(array[ind-1]) > 0){
+			if(array[ind].compareTo(array[ind-1]) <= 0){
 				ind++;
 			}else{
-				Comparable temp = 0;
+				Comparable temp;
 				temp = array[ind];
 				array[ind] = array[ind-1];
 				array[ind-1] = temp;
@@ -104,7 +104,7 @@ public class Sorting {
 		
 	}
 	
-	public Comparable[] MergeSort(Comparable[] array, int x, int y, int z){
+	public Comparable[] SortM(Comparable[] array, int x, int y, int z){
 		int i, j, k;
 		Comparable[] temp = new Comparable[array.length];
 		for (i = x; i <= z; i++){
@@ -119,13 +119,24 @@ public class Sorting {
 			}else{
 				array[k++] = temp[j++];	
 			}
-			}while(i <= y){
-				array[k++] = temp[i++];
 			}
+		while(i <= y){
+				array[k++] = temp[i++];
+		}
 		
 	return array;
 	}	
-
+	
+	public Comparable[] MergeSort(Comparable[] array, int x, int z){
+		if (x < z){
+			int y = x + (z-x)/2;
+			MergeSort(array, x, y);
+			MergeSort(array, y+1, z);
+			array = SortM(array, x, y, z);
+		}
+		return array;
+	}
+	
 	private Comparable digit(String[] num, int position){
 
 		if (position > num.length){
