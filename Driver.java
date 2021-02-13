@@ -38,7 +38,7 @@ public class Driver {
 
                 opcion = v.input(5);
 
-                /*
+                
                 // Gnome Sort
                 if (opcion == 1){
 
@@ -47,17 +47,17 @@ public class Driver {
                 // Merge sort
                 } else if (opcion == 2){
 
-                    //listToSort = sort.MergeSort(listToSort, 0, listToSort.length / 2, listToSort.length - 1);
+                    listToSort = sort.MergeSort(listToSort, 0, listToSort.length / 2, listToSort.length - 1);
                     
                 // Quick Sort
                 } else if (opcion == 3){
 
-                    listToSort = sort.QuickSort(listToSort, 0, listToSort.length - 1);
+                    //listToSort = sort.QuickSort(listToSort, 0, listToSort.length - 1);
                 
                 // radix Sort
                 } else if (opcion == 4){
 
-                    //listToSort = sort.RadixSort(listToSort, 0, listToSort.length - 1);
+                    listToSort = sort.RadixSort(listToSort, 0, listToSort.length - 1);
                     //TODO
                     
                 //Bubble sort

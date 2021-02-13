@@ -11,10 +11,10 @@
 ********************************************************/
 
 import java.util.*;
+import java.util.ArrayList;
 
 public class Sorting {
     
-	Comparable comp;
     /**
      * Constructor methd, creates an iteration of the class
      */
@@ -58,19 +58,31 @@ public class Sorting {
 	}
 	
 	//TODO
-	/*
-	public Comparable[] RadixSort(Comparable[] array, int x, int y){
-		Comparable medio = array[(x+y)/2];
-		while (x <= y){
-			while(array[x] < medio &) i++;
-			while(array[y] > medio)j--;
-			if (x < y){
-				Comparable temp = array[x];
-				array[x] = array[y];
-				array[y] = temp;
-				}
+	public Comparable[] RadixSort(Comparable[] array){
+		
+		Comparable max = 0;
+		for (int i = 0; i < array.length;i++){
+
+			if (array[i].compareTo(max) == 1){
+				max = array[i];
 			}
-	}*/
+		}
+
+		int digit_length = String.valueOf((int) max).length();
+		for (int i = 1; i < digit_length + 1;i++){
+
+			ArrayList[] bucket = new ArrayList[10];
+			for (int j; i < 10; i++){
+				bucket[i] = new ArrayList<Comparable>();
+			}
+
+			for (int j; i < 10; i++){
+				bucket[i] = new ArrayList<Comparable>();
+			}
+
+		}
+		return array;
+	}
 	
 	public Comparable[] GnomeSort(Comparable[] array, int x){
 		int ind = 0;
@@ -113,4 +125,14 @@ public class Sorting {
 		
 	return array;
 	}	
+
+	private Comparable digit(String[] num, int position){
+
+		if (position > num.length){
+			return 0;
+
+		} else{
+			return ((Comparable) Integer.parseInt(num[num.length - position]));
+		}
+	}
 }
