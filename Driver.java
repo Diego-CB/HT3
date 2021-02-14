@@ -5,7 +5,7 @@
 * Driver.java
 * @author Roberto Vallecillos & Diego Cordova
 * @version 1.0
-* Ultima modificacion: 2021-02-13
+* Ultima modificacion: 2021-02-14
 *
 * Driver Program
 * Contains main method
@@ -29,6 +29,7 @@ public class Driver {
         v.print("\n\nBienvenido al sorting App!!\n");
         boolean menu_p = true;
         int opcion;
+        Comparable[] list = {0, 295, 31, 3};
 
         while (menu_p){
 
@@ -38,7 +39,6 @@ public class Driver {
             if (listToSort[0] instanceof Comparable){
 
                 opcion = v.input(5);
-
                 
                 // Gnome Sort
                 if (opcion == 1){

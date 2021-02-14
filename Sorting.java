@@ -5,7 +5,7 @@
 * Sorting.java
 * @author Roberto Vallecillos & Diego Cordova
 * @version 1.0
-* Ultima modificacion: 2021-02-13
+* Ultima modificacion: 2021-02-14
 *
 * Clase Sorting
 * Implementation of sorting algorithms
@@ -34,7 +34,11 @@ public class Sorting {
 		return array;
 	}
 
-	//TODO Ciclo infinito
+	/**
+	 * It sorts an array using Quick sort algorithm
+	 * @param array unsorted array
+	 * @return the sorted array
+	 */
 	public Comparable[] QuickSort(Comparable[] array){
 		
 		if (array.length == 2){
@@ -52,107 +56,82 @@ public class Sorting {
 		}
 
 		Comparable pivot, left_peek, right_peek;
-		int left_peekIndex = 0, right_peekIndex = 1;
+		int left_peekIndex = 0, right_peekIndex = array.length - 1, pivot_index;
 
 		if (array.length % 2 == 0){
 
-			pivot = array[array.length / 2];
+			pivot_index = array.length / 2;
 
 		} else {
-			pivot = array[(array.length - 1) / 2];
+			pivot_index = (array.length - 1) / 2;
 		}
 
 		left_peek = array[left_peekIndex];
-		right_peek = array[array.length - right_peekIndex];
+		right_peek = array[right_peekIndex];
+		pivot = array[pivot_index];
 
-		while ((left_peek.compareTo(pivot) != 0) && (right_peek.compareTo(pivot) != 0)){
+		while (left_peekIndex != right_peekIndex){
 
 			left_peek = array[left_peekIndex];
-			right_peek = array[array.length - right_peekIndex];
+			right_peek = array[right_peekIndex];
+			pivot = array[pivot_index];
 
-			if (compareTo(pivot, left_peek)){
+			if (compareTo(pivot, left_peek) || pivot.compareTo(left_peek) == 0){
 
-				left_peekIndex++;
+				if (!(left_peekIndex == pivot_index)){
+
+					left_peekIndex++;
+
+				} else if (compareTo(right_peek, pivot)  || pivot.compareTo(right_peek) == 0){
+
+					if (!(right_peekIndex == pivot_index)){
+	
+						right_peekIndex--;
+					}
+				}
 				
-			} else{
+			} else if (compareTo(right_peek, pivot) || pivot.compareTo(right_peek) == 0){
 
-				if (compareTo(right_peek, pivot)){
+				if (!(right_peekIndex == pivot_index)){
 
-					right_peekIndex++;
-				} else{
-					
+					right_peekIndex--;
+
+				} else if (!compareTo(right_peek, pivot) && !compareTo(pivot, left_peek)){
+
 					Comparable temp = left_peek;
 					array[left_peekIndex] = right_peek;
-					array[array.length - right_peekIndex] = temp;
-					left_peekIndex++;
-					right_peekIndex++;
-				}
-			}
-		}
-
-		if (array.length == 3){
+					array[right_peekIndex] = temp;
+	
+					if (array.length % 2 == 0){
+	
+						pivot_index = array.length / 2;
 			
-			Comparable temp = array[1];
-			array[1] = array[2];
-			array[2] = temp;
-			return array;
+					} else {
+						pivot_index = (array.length - 1) / 2;
+					}
+			
+					left_peekIndex = 0;
+					right_peekIndex = array.length - 1;
+				}
+
+			} else if (!compareTo(right_peek, pivot) && !compareTo(pivot, left_peek)){
+
+				Comparable temp = left_peek;
+				array[left_peekIndex] = right_peek;
+				array[right_peekIndex] = temp;
+
+				if (array.length % 2 == 0){
+
+					pivot_index = array.length / 2;
+		
+				} else {
+					pivot_index = (array.length - 1) / 2;
+				}
+		
+				left_peekIndex = 0;
+				right_peekIndex = array.length - 1;
+			}
 		}
-
-		Comparable[] low_array, high_array;
-
-		if (array.length % 2 == 0 && array.length > 2){
-
-			low_array = new Comparable[array.length / 2];
-			for (int i = 0; i < low_array.length;i++){
-				low_array[i] = array[i];
-			}
-
-			high_array = new Comparable[array.length / 2];
-			int index = 0;
-			for (int i = array.length / 2; i < array.length;i++){
-
-				high_array[index] = array[i];
-				index++;
-			}
-
-			low_array = QuickSort(low_array);
-			high_array = QuickSort(high_array);
-
-			for (int i = 0; i < low_array.length;i++){
-				array[i] = low_array[i];
-			}
-
-			index = 0;
-			for (int i = array.length / 2; i < array.length;i++){
-				array[i] = high_array[index];
-				index++;
-			}
-
-		} else if (array.length % 2 == 1 && array.length > 2){
-
-			low_array = new Comparable[(array.length - 1) / 2];
-			for (int i = 0; i < low_array.length;i++){
-				low_array[i] = array[i];
-			}
-
-			high_array = new Comparable[array.length / 2];
-			int index = 0;
-			for (int i = (array.length - 1) / 2; i < array.length - 1;i++){
-
-				high_array[index] = array[i];
-				index++;
-			}
-
-			for (int i = 0; i < low_array.length;i++){
-				array[i] = low_array[i];
-			}
-
-			index = 0;
-			for (int i = (array.length - 1) / 2; i < array.length - 1;i++){
-				array[i] = high_array[index];
-				index++;
-			}
-		} 
 		return array;
 	}
 	
