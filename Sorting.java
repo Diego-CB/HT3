@@ -35,28 +35,124 @@ public class Sorting {
 	}
 
 	//TODO Ciclo infinito
-	public Comparable[] QuickSort(Comparable[] array, int x, int y){
-		int i = x;
-		int j = y;
-		Comparable temp;
-		Comparable medio = array[(x+y)/2];
-		while (i <= j){
-			while(array[x].compareTo(medio) <= 0 && x < y) i++;
-			while(array[y].compareTo(medio) > 0)j--;
-			if (i < j){
-				temp = array[i];
-				array[i] = array[j];
-				array[j] = temp;
+	public Comparable[] QuickSort(Comparable[] array){
+		
+		if (array.length == 2){
+
+			if ((int) array[0] > (int) array[1]){
+				Comparable temp = array[0];
+				array[0] = array[1];
+				array[1] = temp;
+			}
+
+			return array;
+
+		} else if (array.length == 1){
+			return array;
+		}
+
+		Comparable pivot, left_peek, right_peek;
+		int left_peekIndex = 0, right_peekIndex = 1;
+
+		if (array.length % 2 == 0){
+
+			pivot = array[array.length / 2];
+
+		} else {
+			pivot = array[(array.length - 1) / 2];
+		}
+
+		left_peek = array[left_peekIndex];
+		right_peek = array[array.length - right_peekIndex];
+
+		while ((left_peek.compareTo(pivot) != 0) && (right_peek.compareTo(pivot) != 0)){
+
+			left_peek = array[left_peekIndex];
+			right_peek = array[array.length - right_peekIndex];
+
+			if (compareTo(pivot, left_peek)){
+
+				left_peekIndex++;
 				
+			} else{
+
+				if (compareTo(right_peek, pivot)){
+
+					right_peekIndex++;
+				} else{
+					
+					Comparable temp = left_peek;
+					array[left_peekIndex] = right_peek;
+					array[array.length - right_peekIndex] = temp;
+					left_peekIndex++;
+					right_peekIndex++;
+				}
 			}
 		}
-		array[x] = array[j];
-		array[j] = medio;
-		if(x < j-1){
-			QuickSort(array, x, j-1);
-		}if(j+1 < y){
-			QuickSort(array, j+1, y);
+
+		if (array.length == 3){
+			
+			Comparable temp = array[1];
+			array[1] = array[2];
+			array[2] = temp;
+			return array;
 		}
+
+		Comparable[] low_array, high_array;
+
+		if (array.length % 2 == 0 && array.length > 2){
+
+			low_array = new Comparable[array.length / 2];
+			for (int i = 0; i < low_array.length;i++){
+				low_array[i] = array[i];
+			}
+
+			high_array = new Comparable[array.length / 2];
+			int index = 0;
+			for (int i = array.length / 2; i < array.length;i++){
+
+				high_array[index] = array[i];
+				index++;
+			}
+
+			low_array = QuickSort(low_array);
+			high_array = QuickSort(high_array);
+
+			for (int i = 0; i < low_array.length;i++){
+				array[i] = low_array[i];
+			}
+
+			index = 0;
+			for (int i = array.length / 2; i < array.length;i++){
+				array[i] = high_array[index];
+				index++;
+			}
+
+		} else if (array.length % 2 == 1 && array.length > 2){
+
+			low_array = new Comparable[(array.length - 1) / 2];
+			for (int i = 0; i < low_array.length;i++){
+				low_array[i] = array[i];
+			}
+
+			high_array = new Comparable[array.length / 2];
+			int index = 0;
+			for (int i = (array.length - 1) / 2; i < array.length - 1;i++){
+
+				high_array[index] = array[i];
+				index++;
+			}
+
+			for (int i = 0; i < low_array.length;i++){
+				array[i] = low_array[i];
+			}
+
+			index = 0;
+			for (int i = (array.length - 1) / 2; i < array.length - 1;i++){
+				array[i] = high_array[index];
+				index++;
+			}
+		} 
 		return array;
 	}
 	
@@ -67,6 +163,9 @@ public class Sorting {
 	 */
 	public Comparable[] RadixSort(Comparable[] array){
 		
+		/**
+		 * get the max number in the array to sort
+		 */
 		Comparable max = 0;
 		for (int i = 0; i < array.length;i++){
 
@@ -75,20 +174,36 @@ public class Sorting {
 			}
 		}
 
-		int digit_length = String.valueOf((int) max).length();
+		int digit_length = String.valueOf((int) max).length(); // number of digits in the max number
+		
+		/**
+		 * Repit sorting the number of diigits in max number
+		 */
 		for (int i = 1; i < digit_length + 1;i++){
 
+			/**
+			 * create a bucket list of list's of comparable objects "Bucket"
+			 * with size 10 (one for each digit in decimal)
+			 */
 			ArrayList<Comparable>[] bucket = new ArrayList[10];
 			for (int j = 0; j < 10; j++){
 				bucket[j] = new ArrayList<Comparable>();
 			}
 
+			/**
+			 * evaluate the i digit of ecery number 
+			 * and place them into the corresponding bucket array
+			 */
 			for (int j = 0; j < array.length; j++){
 				
 				Comparable temp = digit(String.valueOf(array[j]).split(""), i);
 				bucket[(int) temp].add(array[j]);
 			}
 
+			/**
+			 * Create a linear array based on the bucket
+			 * thats the new array
+			 */
 			ArrayList<Comparable> temp_array = new ArrayList<Comparable>();
 			for (int j = 0; j < 10; j++){
 				for (int k = 0; k < bucket[j].size(); k++){
@@ -129,6 +244,7 @@ public class Sorting {
 			return array;
 		
 	}
+
 	/**
 	 * Auxilary method that helps with the different arays for Sortinh
 	 * @param array unsorted Comparable array to sort
@@ -188,4 +304,15 @@ public class Sorting {
 			return ((Comparable) Integer.parseInt(num[num.length - position]));
 		}
 	}
+
+	public boolean compareTo(Comparable x, Comparable y){
+
+		if ((x.compareTo(y)) == 1){
+
+			return true;
+		} else{
+			return false;
+		}
+	}
+
 }
