@@ -40,13 +40,13 @@ public class Sorting {
 		int j = y;
 		Comparable temp;
 		Comparable medio = array[(x+y)/2];
-		while (x <= y){
+		while (i <= j){
 			while(array[x].compareTo(medio) <= 0 && x < y) i++;
 			while(array[y].compareTo(medio) > 0)j--;
-			if (x < y){
-				temp = array[x];
-				array[x] = array[y];
-				array[y] = temp;
+			if (i < j){
+				temp = array[i];
+				array[i] = array[j];
+				array[j] = temp;
 				
 			}
 		}
@@ -107,6 +107,7 @@ public class Sorting {
 	/**
 	 * It sorts an array using Gnome sort algorithm
 	 * @param array unsorted Comparable array to sort
+	 * @param x size of the unsorted Comparable array to sort 
 	 * @return the sorted array
 	 */
 	public Comparable[] GnomeSort(Comparable[] array, int x){
@@ -115,7 +116,7 @@ public class Sorting {
 			if (ind == 0){
 				ind++;
 			}
-			if(array[ind].compareTo(array[ind-1]) <= 0){
+			if(array[ind].compareTo(array[ind-1]) >= 0){
 				ind++;
 			}else{
 				Comparable temp;
@@ -128,7 +129,11 @@ public class Sorting {
 			return array;
 		
 	}
-	
+	/**
+	 * Auxilary method that helps with the different arays for Sortinh
+	 * @param array unsorted Comparable array to sort
+	 * @return the half of sorted array
+	 */
 	public Comparable[] SortM(Comparable[] array, int x, int y, int z){
 		int i, j, k;
 		Comparable[] temp = new Comparable[array.length];
