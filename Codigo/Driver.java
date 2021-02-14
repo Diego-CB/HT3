@@ -43,7 +43,7 @@ public class Driver {
                 // Gnome Sort
                 if (opcion == 1){
 
-                    listToSort = sort.GnomeSort(listToSort, listToSort.length);
+                    listToSort = sort.GnomeSort(listToSort, 0);
 
                 // Merge sort
                 } else if (opcion == 2){
