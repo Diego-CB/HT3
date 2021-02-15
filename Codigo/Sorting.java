@@ -24,7 +24,7 @@ public class Sorting {
     public Comparable[] BubbleSort(Comparable[] array){
 		for(int i = 0; i < array.length; i++){
 			for(int j = 0; j <array.length; j++){
-				if(array[i].compareTo(array[j]) > 0){
+				if(array[i].compareTo(array[j]) < 0){
 					Comparable temp = array[i];
 					array[i] = array[j];
 					array[j] = temp;
@@ -87,6 +87,23 @@ public class Sorting {
 					if (!(right_peekIndex == pivot_index)){
 	
 						right_peekIndex--;
+
+					} else if (!compareTo(right_peek, pivot) && !compareTo(pivot, left_peek)){
+
+						Comparable temp = left_peek;
+						array[left_peekIndex] = right_peek;
+						array[right_peekIndex] = temp;
+		
+						if (array.length % 2 == 0){
+		
+							pivot_index = array.length / 2;
+				
+						} else {
+							pivot_index = (array.length - 1) / 2;
+						}
+				
+						left_peekIndex = 0;
+						right_peekIndex = array.length - 1;
 					}
 				}
 				

@@ -36,7 +36,7 @@ public class Vista {
      */
     public int input(int size){
 
-        print("\nCon que algoritmo quiere ordenar la lista?:\n1. Gnome-Sort\n2. Merge-Sort\n3. Quick-Sort\n4.Radix-Sort\n5.bubble sort\n");
+        print("\nCon que algoritmo quiere ordenar la lista?:\n1. Gnome-Sort\n2. Merge-Sort\n3. Quick-Sort\n4. Radix-Sort\n5. bubble sort\n");
         while (true) { //Se repite hasta que se logre el return
 
             try { 
