@@ -53,7 +53,7 @@ public class Driver {
                 // Quick Sort
                 } else if (opcion == 3){
 
-                    listToSort = sort.QuickSort(listToSort);
+                    listToSort = sort.QuickSort(listToSort, 0, listToSort.length - 1);
                 
                 // radix Sort
                 } else if (opcion == 4){

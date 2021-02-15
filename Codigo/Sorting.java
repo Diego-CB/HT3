@@ -34,71 +34,74 @@ public class Sorting {
 		return array;
 	}
 
+	
 	/**
 	 * It sorts an array using Quick sort algorithm
 	 * @param array unsorted array
+	 * @param fisrt fisrt element of the list to sorted
+	 * @param last last element of the list to sorted
 	 * @return the sorted array
-	 */
-	public Comparable[] QuickSort(Comparable[] array){
-		
-		if (array.length == 2){
+	 **/
+  	public Comparable[] QuickSort(Comparable[] array, int first, int last){
+    	
+		/**
+		 * the pivot, left and righ peek are difined
+		 */
+    	int left_peek = first;
+    	int right_peek = last;
+    	Comparable pivot = array[(left_peek + right_peek) / 2]; 
 
-			if (compareTo(array[0], array[1])){
-				Comparable temp = array[0];
-				array[0] = array[1];
-				array[1] = temp;
+		// while the left peek is not equal to the right peek
+		while( left_peek <= right_peek){
+
+			/**
+			 * if the pivot is grater than the left peek (the left peek is in its position)
+			 * then the left peek change to the next element in the array
+			 */
+			while(compareTo(pivot, array[left_peek])){
+				left_peek++;
+			} 
+
+			/**
+			 * if the right peek is grater than the pivot (the right peek is in its position)
+			 * then the right peek change to the previous element in the array
+			 */
+			while(compareTo(array[right_peek], pivot)){
+				right_peek--;
 			}
 
-			return array;
+			/**
+			 * if right peek is grater or equal to the left peek
+			 * ten we swap the left and right peek in the array
+			 */
+			if(left_peek <= right_peek){
 
-		} else if (array.length == 1){
-			return array;
-		}
-
-		Comparable pivot, left_peek, right_peek;
-		int left_peekIndex = 0, right_peekIndex = array.length - 1, pivot_index;
-
-		if (array.length % 2 == 0){
-
-			pivot_index = array.length / 2;
-
-		} else {
-			pivot_index = (array.length - 1) / 2;
-		}
-
-		left_peek = array[left_peekIndex];
-		right_peek = array[right_peekIndex];
-		pivot = array[pivot_index];
-
-		while (left_peekIndex != right_peekIndex){
-
-			left_peek = array[left_peekIndex];
-			right_peek = array[right_peekIndex];
-
-			if (compareTo(pivot, left_peek) || pivot.compareTo(left_peek) == 0){
-
-				if (left_peekIndex != pivot_index){
-
-					left_peekIndex++;
-				} 
-				
-			} else if (compareTo(right_peek, pivot)){
-
-				if (right_peekIndex != pivot_index){
-
-					right_peekIndex--;
-				} 
-
-			} else if (!compareTo(right_peek, pivot) && !compareTo(pivot, left_peek)){
-
-				Comparable temp = left_peek;
-				array[left_peekIndex] = right_peek;
-				array[right_peekIndex] = temp;
-		
-				left_peekIndex = 0;
-				right_peekIndex = array.length - 1;
+				Comparable temp = array[left_peek];
+				array[left_peek] = array[right_peek];
+				array[right_peek] = temp;
+				left_peek++;
+				right_peek--;
 			}
 		}
+
+		/**
+		 * The higher part of the array is sorted using recursivity
+		 * until the array size is 1
+		 */
+		if(first < right_peek){
+
+			QuickSort(array, first, right_peek);
+		}
+		
+		/**
+		 * The lower part of the array is sorted using recursivity
+		 * until the array size is 1
+		 */
+		if(left_peek < last){
+
+			QuickSort(array, left_peek, last);
+		}
+
 		return array;
 	}
 	
