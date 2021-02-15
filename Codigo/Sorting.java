@@ -74,76 +74,26 @@ public class Sorting {
 
 			left_peek = array[left_peekIndex];
 			right_peek = array[right_peekIndex];
-			pivot = array[pivot_index];
 
 			if (compareTo(pivot, left_peek) || pivot.compareTo(left_peek) == 0){
 
-				if (!(left_peekIndex == pivot_index)){
+				if (left_peekIndex != pivot_index){
 
 					left_peekIndex++;
-
-				} else if (compareTo(right_peek, pivot)  || pivot.compareTo(right_peek) == 0){
-
-					if (!(right_peekIndex == pivot_index)){
-	
-						right_peekIndex--;
-
-					} else if (!compareTo(right_peek, pivot) && !compareTo(pivot, left_peek)){
-
-						Comparable temp = left_peek;
-						array[left_peekIndex] = right_peek;
-						array[right_peekIndex] = temp;
-		
-						if (array.length % 2 == 0){
-		
-							pivot_index = array.length / 2;
+				} 
 				
-						} else {
-							pivot_index = (array.length - 1) / 2;
-						}
-				
-						left_peekIndex = 0;
-						right_peekIndex = array.length - 1;
-					}
-				}
-				
-			} else if (compareTo(right_peek, pivot) || pivot.compareTo(right_peek) == 0){
+			} else if (compareTo(right_peek, pivot)){
 
-				if (!(right_peekIndex == pivot_index)){
+				if (right_peekIndex != pivot_index){
 
 					right_peekIndex--;
-
-				} else if (!compareTo(right_peek, pivot) && !compareTo(pivot, left_peek)){
-
-					Comparable temp = left_peek;
-					array[left_peekIndex] = right_peek;
-					array[right_peekIndex] = temp;
-	
-					if (array.length % 2 == 0){
-	
-						pivot_index = array.length / 2;
-			
-					} else {
-						pivot_index = (array.length - 1) / 2;
-					}
-			
-					left_peekIndex = 0;
-					right_peekIndex = array.length - 1;
-				}
+				} 
 
 			} else if (!compareTo(right_peek, pivot) && !compareTo(pivot, left_peek)){
 
 				Comparable temp = left_peek;
 				array[left_peekIndex] = right_peek;
 				array[right_peekIndex] = temp;
-
-				if (array.length % 2 == 0){
-
-					pivot_index = array.length / 2;
-		
-				} else {
-					pivot_index = (array.length - 1) / 2;
-				}
 		
 				left_peekIndex = 0;
 				right_peekIndex = array.length - 1;
