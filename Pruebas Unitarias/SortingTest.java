@@ -30,7 +30,7 @@ public class SortingTest {
     @Test
     public void QuickWithSameElementArray(){
         Comparable[] array = {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
-        assertEquals(array, sort.QuickSort(array));
+        assertEquals(array, sort.QuickSort(array, 0, array.length - 1));
     }
 
     @Test
