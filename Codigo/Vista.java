@@ -156,7 +156,7 @@ public class Vista {
         try {
             
             FileWriter writer = new FileWriter("list.txt");
-            writer.nullWriter();
+            FileWriter.nullWriter();
             writer.close();
             return "EL archivo list.txt ha sido borrado con exito";
 
